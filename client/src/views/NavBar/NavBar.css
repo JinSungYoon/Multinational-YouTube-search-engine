@@ -1,0 +1,33 @@
+@import "~antd/dist/antd.css";
+
+.menu {
+  background-color: #dd3f5b;
+  height: 80px;
+  width: 100%;
+}
+
+.menu_logo a {
+  color: white;
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 150px;
+}
+
+.search_space {
+  margin-top: 20px;
+}
+
+.search_space .ant-input-group-wrapper {
+  width: 450px;
+}
+
+.search_space .ant-input-affix-wrapper {
+  border-color: white;
+}
+
+.search_space .ant-btn {
+  color: #dd3f5b;
+  background-color: white;
+  border-color: white;
+}
