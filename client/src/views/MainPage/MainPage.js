@@ -1,9 +1,10 @@
 import React, { useState,useEffect } from 'react';
 
 import {Input,Card,Row,Col} from 'antd';
-import 'antd/dist/antd.css';
-import Meta from 'antd/lib/card/Meta';
 import axios from 'axios';
+
+import './MainPage.css';
+import 'antd/dist/antd.css';
 
 const {Search} = Input;
 
@@ -16,7 +17,7 @@ const MainPage = ({match}) =>{
     // NavBar에서 전달된 값이 업데이트 될때만 searchYoutube 실행.
     useEffect(()=>{
 
-        if(match.params.keyword != undefined){
+        if(match.params.keyword !== undefined){
             let data = {
                 keyword : match.params.keyword,
                 regionCode : navigator.language.substr(-2,2),
@@ -92,27 +93,19 @@ const MainPage = ({match}) =>{
         return (
         <Col lg={6} md={8} xs={24} key={index}>
             <Card>
-                <img src={List.snippet.thumbnails.medium.url}></img>
-                <p>{List.snippet.channelTitle}</p>
-                <p>{List.snippet.description}</p>
+                <img class="videoImg" src={List.snippet.thumbnails.medium.url}></img>
+                <p><strong>Channel Title : </strong>{List.snippet.channelTitle}</p>
+                <p><strong>Description :</strong> {List.snippet.description}</p>
             </Card>
         </Col>
         )
 
     })
 
-    console.log(`Keyword : ${match.params.keyword}`);
+    
 
     return(
         <div>
-            <Search
-                className = "antd-temp-input"
-                placeholder = "Compnent 연결전 검색창"
-                allowClear
-                enterButton="Search"
-                size="large"
-                onSearch = {searchYoutube}
-            ></Search>
             <div>
                 <Row>
                         {renderCards}

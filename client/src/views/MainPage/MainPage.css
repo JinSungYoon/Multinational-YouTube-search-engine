@@ -1,0 +1,6 @@
+@import "~antd/dist/antd.css";
+
+.videoImg {
+  height: 160px;
+  width: 240px;
+}

@@ -11,11 +11,15 @@
   float: left;
   margin-left: 20px;
   margin-top: 20px;
-  width: 150px;
+  width: 60px;
 }
 
 .search_space {
   margin-top: 20px;
+}
+
+.search_space .antd-input-space {
+  width: 200px;
 }
 
 .search_space .ant-input-group-wrapper {
