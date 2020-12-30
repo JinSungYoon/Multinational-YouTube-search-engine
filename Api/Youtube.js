@@ -15,7 +15,7 @@ route.get('/',(req,res)=>{
     console.log(`Keyword : ${keyword}, regionCode ${countryCode}`);
     
     service.search.list({
-        key  : 'AIzaSyDDC9sz_BiADBty7C41WqisUNkmfYgo65U',
+        key  : 'apiKey',
         part : 'snippet',
         order : 'rating',
         regionCode : countryCode,
