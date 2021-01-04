@@ -51,13 +51,14 @@ const MainPage = ({match}) =>{
         axios.get('/api/youtube?keyword=youtube')
         .then(response=>{
             if(response.data.success){
-                if(response.data.result.items){
-                    setYoutubeList([...response.data.result.items]);
-                    console.log(response.data.result.items);
-                }
-                else{
-                    console.log(`데이터를 찾아오지 못했습니다.`);
-                }
+                console.log(response);
+                // if(response.result.data.items){
+                //     setYoutubeList([...response.result.data.items]);
+                //     console.log(response.result.data.items);
+                // }
+                // else{
+                //     console.log(`데이터를 찾아오지 못했습니다.`);
+                // }
             }
         })
     }
@@ -77,9 +78,9 @@ const MainPage = ({match}) =>{
         )
         .then(response=>{
             if(response.data.success){
-                if(response.data.result.items){
-                    setYoutubeList([...response.data.result.items]);
-                    console.log(response.data.result.items);
+                if(response.data.sendData.data.items){
+                    setYoutubeList([...response.data.sendData.data.items]);
+                    console.log(response.data.sendData.data.items);
                 }
                 else{
                     console.log(`데이터를 찾아오지 못했습니다.`);
@@ -94,8 +95,12 @@ const MainPage = ({match}) =>{
         <Col lg={6} md={8} xs={24} key={index}>
             <Card>
                 <img class="videoImg" src={List.snippet.thumbnails.medium.url}></img>
+                <p><strong>Title : </strong>{List.snippet.title}</p>
                 <p><strong>Channel Title : </strong>{List.snippet.channelTitle}</p>
-                <p><strong>Description :</strong> {List.snippet.description}</p>
+                <p><strong>조회수 : </strong>{List.statistics.viewCount}</p>
+                <p><strong>좋아요 : </strong>{List.statistics.likeCount}</p>
+                <p><strong>댓글 : </strong>{List.statistics.commentCount}</p>
+                {/* <p><strong>Description :</strong> {List.snippet.description}</p> */}
             </Card>
         </Col>
         )
