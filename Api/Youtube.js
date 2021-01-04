@@ -32,11 +32,6 @@ route.get('/',(req,res)=>{
             console.log(`Title : ${item.snippet.title}`);
             console.log(`VideoId : ${item.id.videoId}`);
             videoList.push(item.id.videoId);
-            // if(videoList.length<5){
-            //     videoList = item.id.videoId;
-            // }else{
-            //     videoList = videoList + `, ${item.id.videoId}`;
-            // }
             console.log(`Channel Title : ${item.snippet.channelTitle}`);
             console.log(`Description : ${item.snippet.description}`);
         })
@@ -44,21 +39,12 @@ route.get('/',(req,res)=>{
         console.log(`VideoList : ${videoList}`);
 
         service.videos.list({
-            key  : 'AIzaSyDDC9sz_BiADBty7C41WqisUNkmfYgo65U',
+            key  : 'apiKey',
             part : 'snippet, statistics, contentDetails',
             id : videoList,
             fields : 'items(id, snippet(title, channelTitle, description, thumbnails), statistics(viewCount, commentCount, likeCount), contentDetails(caption))'
         }).then((response)=>{
             var result = response;
-            //console.log(result.data.items);
-            // result.data.items.foreach((item)=>{
-            //     console.log(`Title : ${item.snippet.title}`);
-            //     console.log(`Channel Title : ${item.snippet.channelTitle}`);
-            //     console.log(`Description : ${item.snippet.description}`);
-            //     console.log(`View Count : ${item.statistics.viewCount}`);
-            //     console.log(`Comment Count : ${item.statistics.commentCount}`);
-            //     console.log(`Like Count : ${item.statistics.likeCount}`);
-            // })
 
             return res.json({
                 success : true,
@@ -78,11 +64,6 @@ route.get('/',(req,res)=>{
         console.log(err);
         return res.json({status:400,success:false,err});
     })
-
-    // service.videos.list({
-    //     part : 'snippet, statistics, contentDetails',
-    //     fileds : 'items(id, snippet(title, description), statistics(viewCount, commentCount, likeCount), contentDetails(caption))'
-    // })
    
 });
 
