@@ -4,3 +4,22 @@
   height: 160px;
   width: 240px;
 }
+
+.content {
+  width: 1630px;
+  height: 800px;
+  float: left;
+}
+
+.sidebar {
+  width: 0px;
+  height: 800px;
+  float: right;
+  margin-left: 10px;
+}
+
+.container {
+  width: 1640px;
+  margin: 20px;
+  height: 800px;
+}

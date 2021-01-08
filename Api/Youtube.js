@@ -1,11 +1,8 @@
 const express = require('express');
 
 const route = express.Router();
+
 var {google} = require('googleapis');
-
-var Youtube = require('youtube-node');
-var youtube = new Youtube();
-
 var service = google.youtube('v3');
 
 route.get('/',(req,res)=>{
@@ -55,11 +52,6 @@ route.get('/',(req,res)=>{
             return res.json({status:400,success:false,err});
         })
 
-        // return res.json({
-        //     success:true,
-        //     result : data
-        // })
-        
     }).catch((err)=>{
         console.log(err);
         return res.json({status:400,success:false,err});

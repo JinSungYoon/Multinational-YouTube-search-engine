@@ -31,6 +31,7 @@ app.use(express.json({extended:false}));
 
 app.use('/api/users',require('../Api/User'));
 app.use('/api/youtube',require('../Api/Youtube'));
+app.use('/api/trends',require('../Api/Trends'));
 
 //routes.initialize(app);
 

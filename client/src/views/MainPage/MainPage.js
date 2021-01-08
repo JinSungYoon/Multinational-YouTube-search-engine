@@ -3,6 +3,8 @@ import React, { useState,useEffect } from 'react';
 import {Input,Card,Row,Col} from 'antd';
 import axios from 'axios';
 
+import WordCloud from 'react-d3-cloud';
+
 import './MainPage.css';
 import 'antd/dist/antd.css';
 
@@ -12,7 +14,7 @@ const MainPage = ({match}) =>{
 
     const [Users,setUsers] = useState([])
     const [YoutubeList,setYoutubeList] = useState([])
-
+    const [WordCloudList,setWordCloudList] = useState([]);
 
     // NavBar에서 전달된 값이 업데이트 될때만 searchYoutube 실행.
     useEffect(()=>{
@@ -23,6 +25,7 @@ const MainPage = ({match}) =>{
                 regionCode : navigator.language.substr(-2,2),
             }
             searchYoutube(data);
+            searchWord(data);
         }
 
     },[match.params.keyword])
@@ -89,6 +92,37 @@ const MainPage = ({match}) =>{
         })
     }
 
+    const transmitWord = (params) =>{
+        
+        let data = {
+            keyword : JSON.stringify(params.text).replaceAll('"',''),
+            regionCode : navigator.language.substr(-2,2),
+        }
+        searchWord(data);
+        searchYoutube(data);
+    }
+
+    const searchWord = (data) =>{
+        
+          axios.get(`/api/trends`,{
+              params:{
+                  keyword :  data.keyword,
+                  regionCode :  data.regionCode,
+              }
+          })
+          .then(response=>{
+              if(response.data.success){
+                  if(response.data.sendData){
+                    console.log(response.data.sendData);
+                    setWordCloudList([...response.data.sendData]);
+                  }
+                  else{
+                      console.log(`데이터를 찾아오지 못했습니다.`);
+                  }
+              }
+          });
+    }
+
     const renderCards = YoutubeList.map((List,index)=>{
         
         return (
@@ -100,23 +134,36 @@ const MainPage = ({match}) =>{
                 <p><strong>조회수 : </strong>{List.statistics.viewCount}</p>
                 <p><strong>좋아요 : </strong>{List.statistics.likeCount}</p>
                 <p><strong>댓글 : </strong>{List.statistics.commentCount}</p>
-                {/* <p><strong>Description :</strong> {List.snippet.description}</p> */}
             </Card>
         </Col>
         )
 
     })
 
-    
-
+    const fontSizeMapper = word => Math.log2(word.value)*15;
+    const rotate = word => word.value % 360;
+      
     return(
-        <div>
-            <div>
+        
+        <div class="container">
+            <div class="content">
                 <Row>
-                        {renderCards}
+                    {renderCards}
                 </Row>
             </div>
+            <div div class="sidebar">
+                <WordCloud
+                        data = {WordCloudList}
+                        width  = "400"
+                        height = "400"
+                        padding = "3"
+                        fontSizeMapper = {fontSizeMapper}
+                        rotate = {rotate}
+                        onWordClick = {transmitWord}
+                />
+            </div>
         </div>
+        
     );
 }
 
