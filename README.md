@@ -2,7 +2,8 @@
 
 이 프로젝트는 여러가지 언어로 입력해도 그와 연관된 Youtube Video를 가져오기 위한 프로그램입니다.
 
-현재 구성한 Layout은 아래 Screenshot과 같이 검색창, youtube 검색 결과, 관련검색어로 구성되어 있습니다.![youtubeSearchEngineLayout](D:\Programming\ReactJS Project\toyProject\Multinational-Yotube-Engine\img\youtubeSearchEngineLayout.JPG)
+현재 구성한 Layout은 아래 Screenshot과 같이 검색창, youtube 검색 결과, 관련검색어로 구성되어 있습니다.
+<img srd="https://github.com/JinSungYoon/Multinational-YouTube-search-engine/blob/master/img/youtubeSearchEngineLayout.JPG" width="90%" />
 
 youtube결과는 google api의 youtube API를 사용하여 관련 영상을 가져왔으며,
 
