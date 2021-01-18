@@ -9,6 +9,8 @@ youtube결과는 google api의 youtube API를 사용하여 관련 영상을 가�
 
 관련검색어는 google api의 google Trends API를 사용하여 관련 검색어를 wordCloud로 표현했습니다.
 
+Card에 영상을 클릭하면 Floating 형식으로 동영상이 나옵니다.
+
 관련 검색어를 클릭하면 해당 검색어 기준으로 관련 영상 및 관련 검색어가 재검색 됩니다.
 
 향후 추가 예정 기능
