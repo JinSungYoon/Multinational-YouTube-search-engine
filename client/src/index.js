@@ -5,9 +5,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {applyMiddleware, createStore} from "redux"
+import rootReducer from "./reducer/index";
+import {Provider} from 'react-redux';
+import thunk from "redux-thunk";
+
+
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer);
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>,  
   </BrowserRouter>,
   document.getElementById('root')
 );

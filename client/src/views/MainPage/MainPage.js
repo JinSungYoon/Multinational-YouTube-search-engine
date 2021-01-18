@@ -8,14 +8,21 @@ import WordCloud from 'react-d3-cloud';
 import './MainPage.css';
 import 'antd/dist/antd.css';
 
+import YoutubePlayer from '../SubPage/YoutubePlayer';
+
+import {useDispatch} from "react-redux";
+import * as actionTypes from "../../actions";
+
 const {Search} = Input;
 
 const MainPage = ({match}) =>{
+    
+    const dispatch = useDispatch();
 
     const [Users,setUsers] = useState([])
     const [YoutubeList,setYoutubeList] = useState([])
-    const [WordCloudList,setWordCloudList] = useState([]);
-
+    const [WordCloudList,setWordCloudList] = useState([]);    
+    // const dispatch = useDispatch();
     // NavBar에서 전달된 값이 업데이트 될때만 searchYoutube 실행.
     useEffect(()=>{
 
@@ -55,13 +62,6 @@ const MainPage = ({match}) =>{
         .then(response=>{
             if(response.data.success){
                 console.log(response);
-                // if(response.result.data.items){
-                //     setYoutubeList([...response.result.data.items]);
-                //     console.log(response.result.data.items);
-                // }
-                // else{
-                //     console.log(`데이터를 찾아오지 못했습니다.`);
-                // }
             }
         })
     }
@@ -127,8 +127,12 @@ const MainPage = ({match}) =>{
         
         return (
         <Col lg={6} md={8} xs={24} key={index}>
-            <Card>
-                <img class="videoImg" src={List.snippet.thumbnails.medium.url}></img>
+            <Card
+                onClick={()=>{
+                    dispatch(actionTypes.startVideoPlayer(List.id,List.snippet.title));
+                }}
+            >
+                <img className="videoImg" src={List.snippet.thumbnails.medium.url}></img>
                 <p><strong>Title : </strong>{List.snippet.title}</p>
                 <p><strong>Channel Title : </strong>{List.snippet.channelTitle}</p>
                 <p><strong>조회수 : </strong>{List.statistics.viewCount}</p>
@@ -152,16 +156,26 @@ const MainPage = ({match}) =>{
                 </Row>
             </div>
             <div div class="sidebar">
-                <WordCloud
-                        data = {WordCloudList}
-                        width  = "400"
-                        height = "400"
-                        padding = "3"
-                        fontSizeMapper = {fontSizeMapper}
-                        rotate = {rotate}
-                        onWordClick = {transmitWord}
-                />
-            </div>
+                <Row>
+                    <Col>
+                        <WordCloud
+                            data = {WordCloudList}
+                            width  = "400"
+                            height = "400"
+                            padding = "3"
+                            fontSizeMapper = {fontSizeMapper}
+                            rotate = {rotate}
+                            onWordClick = {transmitWord}
+                        />
+                    </Col>
+                    <Col>
+                        <YoutubePlayer
+                            width = "400"
+                            height = "400"
+                        />
+                    </Col>
+                </Row>
+            </div>            
         </div>
         
     );
